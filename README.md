@@ -1,0 +1,1 @@
+# bireylesme-yolu
