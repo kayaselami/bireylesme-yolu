@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bireyleşme Yolu — Türkçe Jung Rehberi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gece:#0E1220;
+  --gece-2:#161C2E;
+  --parsomen:#E9DFC8;
+  --parsomen-soluk:#A99F87;
+  --kirmizi:#A5372A;
+  --kirmizi-acik:#C9503F;
+  --altin:#C9A227;
+  --cizgi:#2A3350;
+  --maxw:880px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--gece);color:var(--parsomen);
+  font-family:'Source Sans 3',sans-serif;font-weight:300;
+  line-height:1.7;font-size:17px;
+}
+::selection{background:var(--kirmizi);color:var(--parsomen)}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:50;background:rgba(14,18,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--cizgi)}
+.nav-inner{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:4px;padding:0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-logo{font-family:'Cardo',serif;font-weight:700;color:var(--altin);font-size:1.05rem;padding:14px 12px 14px 0;white-space:nowrap;margin-right:8px;border-right:1px solid var(--cizgi)}
+nav a.navlink{color:var(--parsomen-soluk);text-decoration:none;padding:14px 12px;font-size:.86rem;white-space:nowrap;letter-spacing:.04em;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+nav a.navlink:hover,nav a.navlink:focus-visible{color:var(--parsomen);border-bottom-color:var(--kirmizi)}
+nav a.navlink.aktif{color:var(--altin);border-bottom-color:var(--altin)}
+:focus-visible{outline:2px solid var(--altin);outline-offset:2px}
+
+/* ---------- HERO ---------- */
+header{max-width:var(--maxw);margin:0 auto;padding:64px 20px 48px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.22em;color:var(--kirmizi-acik);text-transform:uppercase;margin-bottom:14px}
+h1{font-family:'Cardo',serif;font-weight:700;font-size:clamp(2.1rem,5.5vw,3.4rem);line-height:1.12;color:var(--parsomen)}
+h1 em{font-style:italic;color:var(--altin)}
+.hero-sub{margin-top:18px;max-width:52ch;color:var(--parsomen-soluk);font-size:1.02rem}
+.hero-quote{margin-top:26px;padding-left:16px;border-left:2px solid var(--kirmizi);font-family:'Cardo',serif;font-style:italic;font-size:1.05rem;color:var(--parsomen);max-width:46ch}
+.hero-quote span{display:block;font-family:'JetBrains Mono',monospace;font-style:normal;font-size:.7rem;color:var(--parsomen-soluk);margin-top:6px;letter-spacing:.1em}
+.mandala{width:190px;height:190px;flex-shrink:0}
+.mandala svg{width:100%;height:100%;animation:don 90s linear infinite}
+@keyframes don{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.mandala svg{animation:none}}
+@media(max-width:720px){header{grid-template-columns:1fr;padding-top:44px}.mandala{width:130px;height:130px;order:-1}}
+
+/* ---------- SECTIONS ---------- */
+main{max-width:var(--maxw);margin:0 auto;padding:0 20px 100px}
+section{padding-top:64px;scroll-margin-top:70px}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+.sec-num{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--kirmizi-acik);letter-spacing:.15em}
+h2{font-family:'Cardo',serif;font-weight:700;font-size:1.75rem;color:var(--parsomen)}
+.sec-desc{color:var(--parsomen-soluk);max-width:64ch;margin-bottom:28px}
+
+/* ---------- DEPOLAMA UYARI ---------- */
+.depo-uyari{background:var(--gece-2);border:1px solid var(--kirmizi-acik);border-radius:6px;padding:10px 14px;font-size:.8rem;color:var(--parsomen-soluk);margin:20px auto 0;max-width:var(--maxw);display:none}
+.depo-uyari.goster{display:block}
+
+/* ---------- YOL HARİTASI ---------- */
+.yol{position:relative;margin-left:8px}
+.yol::before{content:"";position:absolute;left:15px;top:8px;bottom:8px;width:1px;background:linear-gradient(var(--kirmizi),var(--altin))}
+.asama{position:relative;padding:0 0 14px 52px}
+.asama-nokta{position:absolute;left:0;top:4px;width:32px;height:32px;border-radius:50%;border:1px solid var(--kirmizi-acik);background:var(--gece);cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--kirmizi-acik);transition:all .25s}
+.asama.tamam .asama-nokta{background:var(--kirmizi);color:var(--parsomen);border-color:var(--kirmizi)}
+.asama-baslik{font-family:'Cardo',serif;font-size:1.2rem;font-weight:700;color:var(--parsomen);cursor:pointer;background:none;border:none;text-align:left;padding:4px 0;width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.asama-baslik .ok{color:var(--parsomen-soluk);transition:transform .25s;font-size:.8rem}
+.asama.acik .asama-baslik .ok{transform:rotate(90deg)}
+.asama-etiket{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--altin);letter-spacing:.12em;text-transform:uppercase}
+.asama-icerik{display:none;background:var(--gece-2);border:1px solid var(--cizgi);border-radius:6px;padding:18px 20px;margin:8px 0 12px}
+.asama.acik .asama-icerik{display:block}
+.asama-icerik p{margin-bottom:10px;font-size:.95rem}
+.asama-icerik ul{list-style:none;margin:10px 0 4px}
+.asama-icerik li{padding:6px 0;border-top:1px dashed var(--cizgi);font-size:.93rem}
+.asama-icerik li:first-child{border-top:none}
+.kaynak-tip{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--gece);background:var(--altin);border-radius:3px;padding:1px 6px;margin-right:8px;letter-spacing:.05em;vertical-align:1px}
+.kaynak-tip.video{background:var(--kirmizi-acik);color:var(--parsomen)}
+a.dis{color:var(--altin);text-decoration:none;border-bottom:1px dotted var(--altin)}
+a.dis:hover{color:var(--parsomen);border-bottom-color:var(--parsomen)}
+.telif-not{font-size:.8rem;color:var(--parsomen-soluk);border-top:1px solid var(--cizgi);margin-top:10px;padding-top:8px}
+.ilerleme-bar{display:flex;align-items:center;gap:12px;margin-bottom:24px;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--parsomen-soluk)}
+.ilerleme-cizgi{flex:1;height:3px;background:var(--gece-2);border-radius:2px;overflow:hidden}
+.ilerleme-dolgu{height:100%;width:0%;background:linear-gradient(90deg,var(--kirmizi),var(--altin));transition:width .4s}
+
+/* ---------- NOT MODÜLÜ ---------- */
+.not-alan{margin-top:12px;border-top:1px solid var(--cizgi);padding-top:12px}
+.not-alan label{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;color:var(--altin);text-transform:uppercase;display:block;margin-bottom:6px}
+.not-alan textarea{width:100%;min-height:72px;background:var(--gece);border:1px solid var(--cizgi);border-radius:4px;color:var(--parsomen);font-family:'Source Sans 3',sans-serif;font-size:.9rem;padding:10px;resize:vertical;line-height:1.6}
+.not-alan textarea:focus{border-color:var(--altin);outline:none}
+.not-durum{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--parsomen-soluk);margin-top:4px;min-height:1em}
+
+/* ---------- KAVRAMLAR ---------- */
+.kavram{border-bottom:1px solid var(--cizgi)}
+.kavram-baslik{width:100%;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:16px 4px;text-align:left}
+.kavram-baslik .ad{font-family:'Cardo',serif;font-size:1.15rem;font-weight:700;color:var(--parsomen)}
+.kavram-baslik .en{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--parsomen-soluk);letter-spacing:.08em}
+.kavram-govde{display:none;padding:0 4px 18px;font-size:.95rem;color:var(--parsomen)}
+.kavram.acik .kavram-govde{display:block}
+.kavram.acik .kavram-baslik .ad{color:var(--altin)}
+.kavram-govde .dip{margin-top:8px;font-size:.83rem;color:var(--parsomen-soluk)}
+.not-rozet{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--gece);background:var(--altin);border-radius:3px;padding:1px 5px;margin-left:8px;vertical-align:2px}
+
+/* ---------- RÜYA GÜNLÜĞÜ ---------- */
+.gunluk-form{background:var(--gece-2);border:1px solid var(--cizgi);border-radius:6px;padding:18px 20px;margin-bottom:24px}
+.gunluk-form .satir{display:grid;grid-template-columns:auto 1fr;gap:12px;margin-bottom:12px;align-items:center}
+@media(max-width:560px){.gunluk-form .satir{grid-template-columns:1fr}}
+.gunluk-form label{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;color:var(--altin);text-transform:uppercase}
+.gunluk-form input[type="date"],.gunluk-form select{background:var(--gece);border:1px solid var(--cizgi);border-radius:4px;color:var(--parsomen);padding:8px 10px;font-family:'Source Sans 3',sans-serif;font-size:.9rem}
+.gunluk-form textarea{width:100%;min-height:110px;background:var(--gece);border:1px solid var(--cizgi);border-radius:4px;color:var(--parsomen);font-family:'Source Sans 3',sans-serif;font-size:.92rem;padding:10px;resize:vertical;line-height:1.6}
+.gunluk-form textarea:focus,.gunluk-form input:focus,.gunluk-form select:focus{border-color:var(--altin);outline:none}
+.btn{background:var(--kirmizi);color:var(--parsomen);border:none;border-radius:4px;padding:9px 18px;font-family:'Source Sans 3',sans-serif;font-weight:600;font-size:.88rem;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--kirmizi-acik)}
+.btn.ikincil{background:transparent;border:1px solid var(--cizgi);color:var(--parsomen-soluk)}
+.btn.ikincil:hover{border-color:var(--altin);color:var(--altin);background:transparent}
+.gunluk-liste{list-style:none}
+.gunluk-kayit{background:var(--gece-2);border:1px solid var(--cizgi);border-radius:6px;padding:14px 18px;margin-bottom:10px}
+.gunluk-kayit .ust{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px}
+.gunluk-kayit .tarih{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--altin);letter-spacing:.08em}
+.gunluk-kayit .etiket{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--kirmizi-acik);letter-spacing:.1em;text-transform:uppercase}
+.gunluk-kayit .metin{font-size:.92rem;white-space:pre-wrap}
+.gunluk-kayit .sil{background:none;border:none;color:var(--parsomen-soluk);cursor:pointer;font-size:.75rem;font-family:'JetBrains Mono',monospace}
+.gunluk-kayit .sil:hover{color:var(--kirmizi-acik)}
+.gunluk-bos{color:var(--parsomen-soluk);font-size:.9rem;font-style:italic;padding:8px 0}
+.gunluk-uyari{font-size:.82rem;color:var(--parsomen-soluk);border-left:2px solid var(--kirmizi);padding-left:12px;margin-bottom:20px;max-width:64ch}
+
+/* ---------- KAYNAK KARTLARI ---------- */
+.kart-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.kart{background:var(--gece-2);border:1px solid var(--cizgi);border-radius:6px;padding:16px 18px;transition:border-color .2s}
+.kart:hover{border-color:var(--kirmizi-acik)}
+.kart h3{font-family:'Cardo',serif;font-size:1.05rem;color:var(--parsomen);margin-bottom:4px}
+.kart .tur{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--kirmizi-acik);letter-spacing:.14em;text-transform:uppercase}
+.kart p{font-size:.86rem;color:var(--parsomen-soluk);margin:8px 0 10px}
+.kart a{font-size:.82rem}
+
+/* ---------- ELEŞTİREL ---------- */
+.elestiri{background:var(--gece-2);border-left:3px solid var(--kirmizi);border-radius:0 6px 6px 0;padding:16px 20px;margin-bottom:12px}
+.elestiri h3{font-family:'Cardo',serif;font-size:1.05rem;color:var(--parsomen);margin-bottom:6px}
+.elestiri p{font-size:.92rem;color:var(--parsomen-soluk)}
+
+/* ---------- ARAÇLAR / FOOTER ---------- */
+.arac-cubuk{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+footer{border-top:1px solid var(--cizgi);padding:28px 20px 60px;text-align:center;color:var(--parsomen-soluk);font-size:.8rem}
+footer .m{font-family:'JetBrains Mono',monospace;letter-spacing:.1em;font-size:.68rem;margin-top:6px}
+#yukari{position:fixed;right:18px;bottom:18px;width:42px;height:42px;border-radius:50%;background:var(--kirmizi);color:var(--parsomen);border:none;cursor:pointer;font-size:1.1rem;opacity:0;pointer-events:none;transition:opacity .3s;z-index:60}
+#yukari.goster{opacity:1;pointer-events:auto}
+</style>
+</head>
+<body>
+
+<nav aria-label="Ana gezinme">
+  <div class="nav-inner">
+    <span class="nav-logo">☉ Bireyleşme Yolu</span>
+    <a class="navlink" href="#baslangic">Başlangıç</a>
+    <a class="navlink" href="#yol-haritasi">Yol Haritası</a>
+    <a class="navlink" href="#kavramlar">Kavramlar</a>
+    <a class="navlink" href="#gunluk">Rüya Günlüğü</a>
+    <a class="navlink" href="#kaynaklar">Kaynaklar</a>
+    <a class="navlink" href="#elestirel">Eleştirel Bakış</a>
+  </div>
+</nav>
+
+<div class="depo-uyari" id="depo-uyari">
+  ⚠ Bu ortamda kalıcı kayıt kapalı: notların ve ilerlemen yalnızca bu oturumda tutulur. Site kendi adresinde (ör. GitHub Pages) yayımlandığında kayıtlar tarayıcında kalıcı olur.
+</div>
+
+<header>
+  <div>
+    <div class="hero-eyebrow">Türkçe Jung Rehberi</div>
+    <h1>Bilinçdışına giden yolun <em>haritası</em>.</h1>
+    <p class="hero-sub">Carl Gustav Jung'un düşüncesini sırayla, Türkçe kaynaklarla ve boğulmadan öğrenmek için hazırlanmış bir okuma rehberi. 20 ciltlik külliyata dalmadan önce buradan başla.</p>
+    <div class="hero-quote">
+      "Dışarıya bakan rüya görür; içeriye bakan uyanır."
+      <span>— C. G. JUNG'A ATFEDİLİR</span>
+    </div>
+  </div>
+  <div class="mandala" aria-hidden="true">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#C9A227" stroke-width="1" opacity=".9">
+        <circle cx="100" cy="100" r="92" opacity=".35"/>
+        <circle cx="100" cy="100" r="70"/>
+        <circle cx="100" cy="100" r="46" stroke="#A5372A"/>
+        <circle cx="100" cy="100" r="22" stroke="#A5372A"/>
+        <g stroke="#C9A227" opacity=".55">
+          <line x1="100" y1="8" x2="100" y2="192"/>
+          <line x1="8" y1="100" x2="192" y2="100"/>
+          <line x1="35" y1="35" x2="165" y2="165"/>
+          <line x1="165" y1="35" x2="35" y2="165"/>
+        </g>
+        <g stroke="#A5372A">
+          <path d="M100 30 L118 82 L170 100 L118 118 L100 170 L82 118 L30 100 L82 82 Z"/>
+        </g>
+        <circle cx="100" cy="100" r="6" fill="#C9A227" stroke="none"/>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= BAŞLANGIÇ ================= -->
+<section id="baslangic">
+  <div class="sec-head"><span class="sec-num">I</span><h2>Buradan başla</h2></div>
+  <p class="sec-desc">Jung okumak zordur; yanlış sırayla okursan iki kat zordur. Bu site sana dört şey verir: <strong>doğru sıra</strong> (Yol Haritası), <strong>sağlam kavram zemini</strong> (Kavramlar), <strong>kendi kaydını tutma alanı</strong> (notlar ve Rüya Günlüğü) ve <strong>süzülmüş kaynaklar</strong>. İngilizcen zayıfsa endişelenme — rota Türkçe kaynak öncelikli kuruldu.</p>
+  <p class="sec-desc">Nasıl kullanılır: Aşamalara tıkla, aç, oku; her aşamanın altına <strong>kendi notunu yaz</strong> — yazmadan anlaşılmaz. Tamamladıkça daireyi işaretle. Rüyalarını Günlük'e kaydet, okudukça geriye dönüp kavramlarla eşleştir. Bitirdiğinde Eleştirel Bakış'ı mutlaka oku.</p>
+</section>
+
+<!-- ================= YOL HARİTASI ================= -->
+<section id="yol-haritasi">
+  <div class="sec-head"><span class="sec-num">II</span><h2>Yol Haritası</h2></div>
+  <p class="sec-desc">Beş aşama, kolaydan zora, yaklaşık 9-12 aylık tempo. Başlığa tıklayarak aç; soldaki daireye tıklayarak tamamlandı işaretle. Notların otomatik kaydedilir.</p>
+
+  <div class="ilerleme-bar">
+    <span id="ilerleme-metin">0 / 5</span>
+    <div class="ilerleme-cizgi"><div class="ilerleme-dolgu" id="ilerleme-dolgu"></div></div>
+  </div>
+
+  <div class="yol">
+
+    <div class="asama" data-asama="1">
+      <button class="asama-nokta" aria-label="Aşama 1 tamamlandı işaretle">1</button>
+      <button class="asama-baslik" aria-expanded="false">
+        <span><span class="asama-etiket">Zemin · Ay 1</span><br>Türkçe bir temel kur</span>
+        <span class="ok">▶</span>
+      </button>
+      <div class="asama-icerik">
+        <p>Jung'a doğrudan girme. Önce kavramların Türkçe karşılıklarını ve genel çerçeveyi berrak bir kalemden öğren.</p>
+        <ul>
+          <li><span class="kaynak-tip">KİTAP</span><strong>Engin Geçtan — Psikanaliz ve Sonrası</strong>, "Analitik Psikoloji: Carl Gustav Jung" bölümü. Türkçe yazılmış en berrak Jung özeti; 1-2 günde biter ve sonrasını yarı yarıya kolaylaştırır.</li>
+        </ul>
+        <div class="telif-not">⚖ Telif nedeniyle bölümün metni burada yayımlanamaz. Kitabı kitapçıdan, sahaftan veya kütüphaneden edin — Metis Yayınları baskıları yaygındır.</div>
+        <div class="not-alan">
+          <label for="not-asama-1">Notlarım</label>
+          <textarea id="not-asama-1" data-notkey="asama1" placeholder="Bu aşamada seni şaşırtan, kafanı karıştıran veya aklında kalan ne oldu?"></textarea>
+          <div class="not-durum" data-durum="asama1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="asama" data-asama="2">
+      <button class="asama-nokta" aria-label="Aşama 2 tamamlandı işaretle">2</button>
+      <button class="asama-baslik" aria-expanded="false">
+        <span><span class="asama-etiket">Görsel Giriş · Ay 1-2</span><br>Videolarla kavram haritası çıkar</span>
+        <span class="ok">▶</span>
+      </button>
+      <div class="asama-icerik">
+        <p>Kavramları artık tanıyorsun; şimdi aralarındaki bağlantıyı görselleştir. Toplam 3-4 saatlik izleme.</p>
+        <ul>
+          <li><span class="kaynak-tip video">VİDEO</span><a class="dis" href="https://www.youtube.com/@academyofideas" target="_blank" rel="noopener">Academy of Ideas</a> — Jung oynatma listesi. 10-15 dakikalık derli toplu videolar; çoğunda Türkçe altyazı var, yoksa otomatik çeviriyi aç.</li>
+          <li><span class="kaynak-tip video">VİDEO</span><a class="dis" href="https://www.youtube.com/@eternalised" target="_blank" rel="noopener">Eternalised</a> — kitap bazlı uzun videolar; bu aşamada sadece giriş videolarını izle, <em>Aion</em> videosunu 5. aşamaya sakla.</li>
+        </ul>
+        <div class="not-alan">
+          <label for="not-asama-2">Notlarım</label>
+          <textarea id="not-asama-2" data-notkey="asama2" placeholder="Hangi kavramlar arasında bağlantı gördün? Neresi hâlâ bulanık?"></textarea>
+          <div class="not-durum" data-durum="asama2"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="asama" data-asama="3">
+      <button class="asama-nokta" aria-label="Aşama 3 tamamlandı işaretle">3</button>
+      <button class="asama-baslik" aria-expanded="false">
+        <span><span class="asama-etiket">İlk Ana Metin · Ay 2-3</span><br>İnsan ve Sembolleri</span>
+        <span class="ok">▶</span>
+      </button>
+      <div class="asama-icerik">
+        <p>Jung'un genel okur için tasarladığı tek kitap; son eseri ve vasiyeti sayılır. Teorinin derli toplu özeti — bol görselli, en erişilebilir ana metin.</p>
+        <ul>
+          <li><span class="kaynak-tip">KİTAP</span><strong>İnsan ve Sembolleri</strong> — Okuyan Us Yay., çev. Ali Nahit Babaoğlu (psikiyatrist çevirmen, terminolojiye hâkim).</li>
+          <li><span class="kaynak-tip">KİTAP</span>Alternatif çeviri: Kabalcı Yayınevi, çev. Hatice Mukaddes İlgün (2016).</li>
+        </ul>
+        <div class="telif-not">Çeviride garip gelen cümle senin hatan olmayabilir; takıldığın pasajı orijinaliyle karşılaştır veya karşılaştırtacak birini bul.</div>
+        <div class="not-alan">
+          <label for="not-asama-3">Notlarım</label>
+          <textarea id="not-asama-3" data-notkey="asama3" placeholder="Bölüm bölüm not al: her bölümden bir cümlelik özet + bir soru."></textarea>
+          <div class="not-durum" data-durum="asama3"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="asama" data-asama="4">
+      <button class="asama-nokta" aria-label="Aşama 4 tamamlandı işaretle">4</button>
+      <button class="asama-baslik" aria-expanded="false">
+        <span><span class="asama-etiket">Derinleşme · Ay 4-6</span><br>İkincil literatür ve seçme metinler</span>
+        <span class="ok">▶</span>
+      </button>
+      <div class="asama-icerik">
+        <p>Artık teoriyi biliyorsun; şimdi derinlik ve sistematik bütünlük zamanı. <strong>Dikkat: düşme noktası burasıdır.</strong> Haftalık küçük hedef koy, not yazmayı bırakma.</p>
+        <ul>
+          <li><span class="kaynak-tip">KİTAP</span><strong>Murray Stein — Jung'un Ruh Haritası</strong> — teorinin en saygın sistematik özeti; Türkçe çevirisi mevcut.</li>
+          <li><span class="kaynak-tip">KİTAP</span><strong>Anthony Stevens — Jung</strong> (kısa giriş) — eleştirel mesafeli, dengeli.</li>
+          <li><span class="kaynak-tip video">VİDEO</span><a class="dis" href="https://www.youtube.com/c/CarlJungDepthPsychologyReadingGroup" target="_blank" rel="noopener">Carl Jung Depth Psychology Reading Group</a> — Collected Works'ü metin metin açıklayan okuma grubu; ağır ama sağlam.</li>
+        </ul>
+        <div class="not-alan">
+          <label for="not-asama-4">Notlarım</label>
+          <textarea id="not-asama-4" data-notkey="asama4" placeholder="Stein'ın anlatımıyla Jung'un kendi metni arasında fark gördün mü? Nerede?"></textarea>
+          <div class="not-durum" data-durum="asama4"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="asama" data-asama="5">
+      <button class="asama-nokta" aria-label="Aşama 5 tamamlandı işaretle">5</button>
+      <button class="asama-baslik" aria-expanded="false">
+        <span><span class="asama-etiket">Zirve · Ay 7-12</span><br>Anılar, Aion ve Kırmızı Kitap</span>
+        <span class="ok">▶</span>
+      </button>
+      <div class="asama-icerik">
+        <p>En kişisel ve en zor metinler en sona. Bu aşamaya hazırlıksız gelen okur ya bırakır ya da yanlış anlar.</p>
+        <ul>
+          <li><span class="kaynak-tip">KİTAP</span><strong>Anılar, Düşler, Düşünceler</strong> — Jung'un otobiyografisi; teoriyi yaşam öyküsüne oturtur.</li>
+          <li><span class="kaynak-tip">KİTAP</span><strong>Aion</strong> — benlik arketipinin derin incelemesi; Eternalised'ın Aion serisiyle paralel git.</li>
+          <li><span class="kaynak-tip">KİTAP</span><strong>Kırmızı Kitap (Liber Novus)</strong> — Jung'un iç yolculuğunun ham kaydı. Teoloji, simya, vizyon iç içe; ancak tüm yolu yürüdükten sonra anlamlıdır.</li>
+        </ul>
+        <div class="not-alan">
+          <label for="not-asama-5">Notlarım</label>
+          <textarea id="not-asama-5" data-notkey="asama5" placeholder="Yolun başındaki notlarına dön: bir yıl önceki anlayışınla şimdiki arasındaki fark ne?"></textarea>
+          <div class="not-durum" data-durum="asama5"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= KAVRAMLAR ================= -->
+<section id="kavramlar">
+  <div class="sec-head"><span class="sec-num">III</span><h2>Kavram Sözlüğü</h2></div>
+  <p class="sec-desc">Okurken takıldığında buraya atla. Her maddenin altında kendi not alanın var — kavramı kendi cümlelerinle yeniden yazmak, anlamanın en sağlam testidir.</p>
+
+  <div class="kavram" data-kavram="kolektif">
+    <button class="kavram-baslik" aria-expanded="false"><span class="ad">Kolektif Bilinçdışı</span><span class="en">collective unconscious</span></button>
+    <div class="kavram-govde">
+      <p>Kişisel deneyimden gelmeyen, insanlığın ortak mirası olan bilinçdışı katman. Freud'un bilinçdışı kişisel bastırılmışlıklardan oluşur; Jung buna bir kat daha ekler: tüm insanlarda ortak, doğuştan gelen imge ve eğilim kalıpları. Mitlerin, masalların ve rüyaların kültürler arası benzerliğini bununla açıklar.</p>
+      <p class="dip">Nerede okunur: İnsan ve Sembolleri, 1. bölüm; CW 9i.</p>
+      <div class="not-alan">
+        <label>Kendi cümlemle</label>
+        <textarea data-notkey="k-kolektif" placeholder="Bu kavramı bir arkadaşına nasıl anlatırdın?"></textarea>
+        <div class="not-durum" data-durum="k-kolektif"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kavram" data-kavram="arketip">
+    <button class="kavram-baslik" aria-expanded="false"><span class="ad">Arketip</span><span class="en">archetype</span></button>
+    <div class="kavram-govde">
+      <p>Kolektif bilinçdışındaki evrensel kalıplar: Anne, Kahraman, Yaşlı Bilge, Hilebaz gibi. Arketip hazır bir görüntü değil, görüntü <em>üretme eğilimidir</em> — nehir yatağı gibi: su (deneyim) aktığında biçim ortaya çıkar. Sık yapılan hata: arketipi klişe karakter tipiyle karıştırmak.</p>
+      <p class="dip">Nerede okunur: İnsan ve Sembolleri; Stein, Jung'un Ruh Haritası, arketip bölümü.</p>
+      <div class="not-alan">
+        <label>Kendi cümlemle</label>
+        <textarea data-notkey="k-arketip" placeholder="Kendi hayatından veya bir filmden bir arketip örneği yaz."></textarea>
+        <div class="not-durum" data-durum="k-arketip"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kavram" data-kavram="golge">
+    <button class="kavram-baslik" aria-expanded="false"><span class="ad">Gölge</span><span class="en">shadow</span></button>
+    <div class="kavram-govde">
+      <p>Kişiliğin reddettiğimiz, görmek istemediğimiz yanı — sadece "kötü" yanlar değil, yaşanmamış potansiyeller de. Gölge yok sayıldıkça dışarıya yansıtılır: başkalarında en çok nefret ettiğin şey çoğu zaman kendi gölgendir. "Gölgeyle yüzleşme" bireyleşmenin ilk büyük eşiğidir.</p>
+      <p class="dip">Dikkat: İnternetteki "gölge çalışması" içeriklerinin çoğu bu kavramı self-help sosuna bulamıştır. Kaynağa dön.</p>
+      <div class="not-alan">
+        <label>Kendi cümlemle</label>
+        <textarea data-notkey="k-golge" placeholder="Kavramı kendi cümlelerinle yeniden yaz."></textarea>
+        <div class="not-durum" data-durum="k-golge"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kavram" data-kavram="persona">
+    <button class="kavram-baslik" aria-expanded="false"><span class="ad">Persona</span><span class="en">persona</span></button>
+    <div class="kavram-govde">
+      <p>Topluma dönük yüzümüz; Latince "tiyatro maskesi"nden gelir. Persona gerekli bir uyum aracıdır — sorun, kişinin maskeyle özdeşleşmesi, yani kendini mesleğinden veya rolünden ibaret sanmasıdır.</p>
+      <p class="dip">Nerede okunur: Two Essays on Analytical Psychology (CW 7).</p>
+      <div class="not-alan">
+        <label>Kendi cümlemle</label>
+        <textarea data-notkey="k-persona" placeholder="Kavramı kendi cümlelerinle yeniden yaz."></textarea>
+        <div class="not-durum" data-durum="k-persona"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kavram" data-kavram="anima">
+    <button class="kavram-baslik" aria-expanded="false"><span class="ad">Anima / Animus</span><span class="en">anima / animus</span></button>
+    <div class="kavram-govde">
+      <p>Erkeğin bilinçdışındaki dişil imge (anima) ve kadının bilinçdışındaki eril imge (animus). Rüyalarda ve romantik yansıtmalarda görünür: "ilk görüşte aşk" çoğu zaman karşındaki kişiye kendi anima/animus imgeni giydirmektir. Jung'un en tartışmalı kavramlarından biri — dönemine bağlı cinsiyet varsayımları bugün ciddi eleştiri alır (bkz. Eleştirel Bakış).</p>
+      <div class="not-alan">
+        <label>Kendi cümlemle</label>
+        <textarea data-notkey="k-anima" placeholder="Kavramı kendi cümlelerinle yeniden yaz."></textarea>
+        <div class="not-durum" data-durum="k-anima"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kavram" data-kavram="bireylesme">
+    <button class="kavram-baslik" aria-expanded="false"><span class="ad">Bireyleşme</span><span class="en">individuation</span></button>
+    <div class="kavram-govde">
+      <p>Jung psikolojisinin ana hedefi: kişiliğin bilinç ve bilinçdışı parçalarının bütünleşerek kişinin "kendisi olması" süreci. Bencilleşme değil, tam tersi — persona ile özdeşleşmeden ve gölgeyi inkârdan çıkıp bütünlüğe yürümek. Genelde yaşamın ikinci yarısının görevi sayılır.</p>
+      <p class="dip">Bu sitenin adı buradan gelir.</p>
+      <div class="not-alan">
+        <label>Kendi cümlemle</label>
+        <textarea data-notkey="k-bireylesme" placeholder="Kavramı kendi cümlelerinle yeniden yaz."></textarea>
+        <div class="not-durum" data-durum="k-bireylesme"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kavram" data-kavram="benlik">
+    <button class="kavram-baslik" aria-expanded="false"><span class="ad">Benlik</span><span class="en">the Self</span></button>
+    <div class="kavram-govde">
+      <p>Psişenin bütününün merkezi ve aynı zamanda hedefi; ego yalnızca bilincin merkezidir, Benlik ise bilinç + bilinçdışının tamamını kapsar. Mandala imgeleri Jung'a göre Benlik'in kendiliğinden sembolleridir.</p>
+      <p class="dip">Nerede okunur: Aion (CW 9ii) — ama 5. aşamadan önce değil.</p>
+      <div class="not-alan">
+        <label>Kendi cümlemle</label>
+        <textarea data-notkey="k-benlik" placeholder="Ego ile Benlik farkını kendi cümlenle yaz."></textarea>
+        <div class="not-durum" data-durum="k-benlik"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kavram" data-kavram="senkronisite">
+    <button class="kavram-baslik" aria-expanded="false"><span class="ad">Senkronisite</span><span class="en">synchronicity</span></button>
+    <div class="kavram-govde">
+      <p>Nedensel bağı olmayan ama anlamlı biçimde çakışan olaylar: tam birini düşünürken araması gibi. Jung bunu "anlamlı rastlantı" olarak kavramsallaştırır. Bilimsel statüsü en zayıf, en çok istismar edilen kavramıdır — mistik pazarlamaya en açık kapı budur. Temkinli oku.</p>
+      <div class="not-alan">
+        <label>Kendi cümlemle</label>
+        <textarea data-notkey="k-senkronisite" placeholder="Kavramı kendi cümlelerinle yeniden yaz — ve bir de şüpheci itiraz ekle."></textarea>
+        <div class="not-durum" data-durum="k-senkronisite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RÜYA GÜNLÜĞÜ ================= -->
+<section id="gunluk">
+  <div class="sec-head"><span class="sec-num">IV</span><h2>Rüya Günlüğü</h2></div>
+  <p class="sec-desc">Jung'a göre bilinçdışıyla ana iletişim kanalı rüyadır. Uyandığın anda kaydet — 10 dakika sonra kaybolur. Yorumlamaya acele etme: önce biriktir, örüntüleri zamanla gör.</p>
+  <p class="gunluk-uyari">Bu günlük bir farkındalık aracıdır, kendi kendine analiz aracı değil. Jung rüya yorumunu analistle yapılan bir iş sayar; buradaki amaç kayıt tutmak ve okuduğun kavramlarla örüntü fark etmektir. Zorlayıcı içerikler yaşıyorsan bir uzmana danış.</p>
+
+  <div class="gunluk-form">
+    <div class="satir">
+      <label for="ruya-tarih">Tarih</label>
+      <input type="date" id="ruya-tarih">
+    </div>
+    <div class="satir">
+      <label for="ruya-etiket">Tema</label>
+      <select id="ruya-etiket">
+        <option value="">— seçimlik —</option>
+        <option>Gölge</option>
+        <option>Persona</option>
+        <option>Anima/Animus</option>
+        <option>Benlik/Mandala</option>
+        <option>Su/Deniz</option>
+        <option>Yolculuk</option>
+        <option>Diğer</option>
+      </select>
+    </div>
+    <label for="ruya-metin" style="display:block;margin-bottom:6px">Rüya</label>
+    <textarea id="ruya-metin" placeholder="Olduğu gibi yaz: imgeler, duygular, renkler. Yorum yok, sadece kayıt."></textarea>
+    <div style="margin-top:12px"><button class="btn" id="ruya-kaydet">Rüyayı kaydet</button></div>
+  </div>
+
+  <ul class="gunluk-liste" id="gunluk-liste"></ul>
+  <p class="gunluk-bos" id="gunluk-bos">Henüz kayıt yok. İlk rüyanı ekle — boş sayfa en zor sayfadır.</p>
+</section>
+
+<!-- ================= KAYNAKLAR ================= -->
+<section id="kaynaklar">
+  <div class="sec-head"><span class="sec-num">V</span><h2>Süzülmüş Kaynaklar</h2></div>
+  <p class="sec-desc">İnternetteki Jung içeriğinin büyük kısmı motivasyon sosuna bulanmış sulandırmadır. Buradaki liste kısadır çünkü süzülmüştür.</p>
+
+  <div class="kart-grid">
+    <div class="kart">
+      <span class="tur">Video · Giriş</span>
+      <h3>Academy of Ideas</h3>
+      <p>Kavram bazlı kısa videolar. Başlangıç için en verimli kanal; çoğu videoda Türkçe altyazı.</p>
+      <a class="dis" href="https://www.youtube.com/@academyofideas" target="_blank" rel="noopener">Kanala git →</a>
+    </div>
+    <div class="kart">
+      <span class="tur">Video · Derinleşme</span>
+      <h3>Eternalised</h3>
+      <p>Kitap bazlı uzun anlatımlar; Aion ve Kırmızı Kitap özetleri dahil.</p>
+      <a class="dis" href="https://www.youtube.com/@eternalised" target="_blank" rel="noopener">Kanala git →</a>
+    </div>
+    <div class="kart">
+      <span class="tur">Podcast · Uygulama</span>
+      <h3>This Jungian Life</h3>
+      <p>Üç Jung analistinin sohbeti; her bölümde bir dinleyici rüyası yorumlanır. Teorinin sahada nasıl kullanıldığını gösterir.</p>
+      <a class="dis" href="https://thisjungianlife.com" target="_blank" rel="noopener">Siteye git →</a>
+    </div>
+    <div class="kart">
+      <span class="tur">Video · Ders</span>
+      <h3>Jung Depth Psychology Reading Group</h3>
+      <p>Collected Works'ü metin metin açıklayan okuma grubu kayıtları. Yavaş ama sağlam.</p>
+      <a class="dis" href="https://www.youtube.com/c/CarlJungDepthPsychologyReadingGroup" target="_blank" rel="noopener">Kanala git →</a>
+    </div>
+    <div class="kart">
+      <span class="tur">Web · Makale &amp; Kurs</span>
+      <h3>Applied Jung</h3>
+      <p>Centre for Applied Jungian Studies. Kaliteli makaleler ve yapılandırılmış kurslar.</p>
+      <a class="dis" href="https://appliedjung.com" target="_blank" rel="noopener">Siteye git →</a>
+    </div>
+    <div class="kart">
+      <span class="tur">Web · Arşiv</span>
+      <h3>ARAS</h3>
+      <p>Arketipsel Sembolizm Araştırma Arşivi. Sembol çalışırken başvuru kaynağı.</p>
+      <a class="dis" href="https://aras.org" target="_blank" rel="noopener">Siteye git →</a>
+    </div>
+    <div class="kart">
+      <span class="tur">Kitap · Türkçe</span>
+      <h3>İnsan ve Sembolleri</h3>
+      <p>İki Türkçe çeviri: Okuyan Us (Babaoğlu) ve Kabalcı (İlgün, 2016). Rehberin 3. aşaması.</p>
+      <a class="dis" href="https://okuyanus.com.tr/urun/insan-ve-sembolleri/" target="_blank" rel="noopener">Okuyan Us sayfası →</a>
+    </div>
+    <div class="kart">
+      <span class="tur">Kitap · Türkçe</span>
+      <h3>Psikanaliz ve Sonrası</h3>
+      <p>Engin Geçtan. Jung bölümü, Türkçedeki en berrak giriş metni. Rehberin 1. aşaması.</p>
+      <a class="dis" href="https://www.metiskitap.com" target="_blank" rel="noopener">Yayınevi →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ELEŞTİREL ================= -->
+<section id="elestirel">
+  <div class="sec-head"><span class="sec-num">VI</span><h2>Eleştirel Bakış</h2></div>
+  <p class="sec-desc">Bu site Jung'u önemser; tam da bu yüzden onu sorgular. Hayranlık eleştiriyi susturduğunda öğrenme biter, mürit üretimi başlar. Yolu bitiren okur şunları bilmeli:</p>
+
+  <div class="elestiri">
+    <h3>Bilimsel sınanabilirlik sorunu</h3>
+    <p>Kolektif bilinçdışı ve arketip kavramları deneysel olarak sınanması güç iddialardır; ana akım akademik psikoloji Jung'u büyük ölçüde bu yüzden dışarıda tutar. Jung'un değeri klinik ve yorumbilgisel gelenekte aranmalı, laboratuvar biliminde değil.</p>
+  </div>
+  <div class="elestiri">
+    <h3>Senkronisite ve mistisizm kapısı</h3>
+    <p>Senkronisite, astrolojiden kuantum mistisizmine kadar her şeyin Jung'a yamanmasına açılan kapıdır. Jung'un kendisi de geç dönem metinlerinde bu sınırı zorlar. Okur olarak neyin psikoloji, neyin spekülasyon olduğunu ayırt etme yükü sende.</p>
+  </div>
+  <div class="elestiri">
+    <h3>Dönemine bağlı cinsiyet varsayımları</h3>
+    <p>Anima/animus kuramı, erilliği ve dişilliği özcü biçimde tanımlar; çağdaş Jungcular (post-Jungian literatür) bu kavramları ciddi biçimde revize etmiştir. Orijinal metni tarihsel bağlamıyla oku.</p>
+  </div>
+  <div class="elestiri">
+    <h3>Self-help endüstrisinin istismarı</h3>
+    <p>"Gölge çalışması", "arketipini keşfet" başlıklı içeriklerin çoğu Jung'un kavramlarını pazarlama diline çevirir. Bir içerik sana hızlı dönüşüm vaat ediyorsa Jung okumuyorsundur — Jung'da hiçbir şey hızlı değildir.</p>
+  </div>
+
+  <div class="arac-cubuk">
+    <button class="btn ikincil" id="disa-aktar">Tüm notlarımı ve günlüğümü indir (.txt)</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Bu site bir öğrenme rehberidir; terapi veya klinik tavsiye değildir. Notların ve rüyaların yalnızca kendi tarayıcında saklanır, hiçbir sunucuya gönderilmez.
+  <div class="m">BİREYLEŞME YOLU · v2 · TELİFLİ METİNLER BARINDIRILMAZ, KAYNAĞA YÖNLENDİRİLİR</div>
+</footer>
+
+<button id="yukari" aria-label="Sayfa başına dön">↑</button>
+
+<script>
+/* ============================================================
+   DEPOLAMA: localStorage varsa kullan (yayımlanmış sitede kalıcı),
+   yoksa bellek içi çalış (önizleme ortamı) ve kullanıcıyı uyar.
+   ============================================================ */
+var depo = (function(){
+  var bellek = {};
+  var kalici = false;
+  try {
+    var t = '__test__';
+    window.localStorage.setItem(t, t);
+    window.localStorage.removeItem(t);
+    kalici = true;
+  } catch(e) { kalici = false; }
+  return {
+    kalici: kalici,
+    al: function(k){
+      if (kalici) { try { return window.localStorage.getItem(k); } catch(e){ return bellek[k] || null; } }
+      return bellek.hasOwnProperty(k) ? bellek[k] : null;
+    },
+    yaz: function(k, v){
+      if (kalici) { try { window.localStorage.setItem(k, v); return; } catch(e){} }
+      bellek[k] = v;
+    },
+    sil: function(k){
+      if (kalici) { try { window.localStorage.removeItem(k); return; } catch(e){} }
+      delete bellek[k];
+    }
+  };
+})();
+var ONEK = 'by_'; // bireyleşme yolu anahtar öneki
+if (!depo.kalici) { document.getElementById('depo-uyari').classList.add('goster'); }
+
+/* ---- Aşamalar: aç/kapa + tamamlandı ---- */
+function ilerlemeYukle(){
+  var v = depo.al(ONEK + 'ilerleme');
+  return v ? JSON.parse(v) : {};
+}
+function ilerlemeKaydet(o){ depo.yaz(ONEK + 'ilerleme', JSON.stringify(o)); }
+
+var tamamlanan = ilerlemeYukle();
+document.querySelectorAll('.asama').forEach(function(a){
+  var baslik = a.querySelector('.asama-baslik');
+  var nokta = a.querySelector('.asama-nokta');
+  var id = a.dataset.asama;
+  if (tamamlanan[id]) { a.classList.add('tamam'); nokta.textContent = '✓'; }
+  baslik.addEventListener('click', function(){
+    var acik = a.classList.toggle('acik');
+    baslik.setAttribute('aria-expanded', acik);
+  });
+  nokta.addEventListener('click', function(e){
+    e.stopPropagation();
+    if (tamamlanan[id]) { delete tamamlanan[id]; a.classList.remove('tamam'); nokta.textContent = id; }
+    else { tamamlanan[id] = true; a.classList.add('tamam'); nokta.textContent = '✓'; }
+    ilerlemeKaydet(tamamlanan);
+    guncelleIlerleme();
+  });
+});
+function guncelleIlerleme(){
+  var n = Object.keys(tamamlanan).length;
+  document.getElementById('ilerleme-metin').textContent = n + ' / 5';
+  document.getElementById('ilerleme-dolgu').style.width = (n/5*100) + '%';
+}
+guncelleIlerleme();
+
+/* ---- Not alanları: otomatik kaydet (yazmayı bıraktıktan 600ms sonra) ---- */
+document.querySelectorAll('textarea[data-notkey]').forEach(function(ta){
+  var key = ONEK + 'not_' + ta.dataset.notkey;
+  var durum = document.querySelector('.not-durum[data-durum="' + ta.dataset.notkey + '"]');
+  var kayitli = depo.al(key);
+  if (kayitli) { ta.value = kayitli; if (durum) durum.textContent = 'kayıtlı'; }
+  var zamanlayici = null;
+  ta.addEventListener('input', function(){
+    if (durum) durum.textContent = 'yazılıyor…';
+    clearTimeout(zamanlayici);
+    zamanlayici = setTimeout(function(){
+      depo.yaz(key, ta.value);
+      if (durum) durum.textContent = ta.value.trim() ? 'kaydedildi ✓' : '';
+      notRozetleriniGuncelle();
+    }, 600);
+  });
+});
+
+/* ---- Kavram accordion + not rozeti ---- */
+document.querySelectorAll('.kavram-baslik').forEach(function(b){
+  b.addEventListener('click', function(){
+    var k = b.parentElement;
+    var acik = k.classList.toggle('acik');
+    b.setAttribute('aria-expanded', acik);
+  });
+});
+function notRozetleriniGuncelle(){
+  document.querySelectorAll('.kavram').forEach(function(k){
+    var ta = k.querySelector('textarea[data-notkey]');
+    var ad = k.querySelector('.kavram-baslik .ad');
+    var mevcut = ad.querySelector('.not-rozet');
+    var dolu = ta && ta.value.trim().length > 0;
+    if (dolu && !mevcut) {
+      var r = document.createElement('span');
+      r.className = 'not-rozet'; r.textContent = 'not';
+      ad.appendChild(r);
+    } else if (!dolu && mevcut) { mevcut.remove(); }
+  });
+}
+notRozetleriniGuncelle();
+
+/* ---- Rüya günlüğü ---- */
+function gunlukYukle(){
+  var v = depo.al(ONEK + 'gunluk');
+  return v ? JSON.parse(v) : [];
+}
+function gunlukKaydet(liste){ depo.yaz(ONEK + 'gunluk', JSON.stringify(liste)); }
+
+function gunlukCiz(){
+  var liste = gunlukYukle();
+  var ul = document.getElementById('gunluk-liste');
+  var bos = document.getElementById('gunluk-bos');
+  ul.innerHTML = '';
+  bos.style.display = liste.length ? 'none' : 'block';
+  liste.slice().reverse().forEach(function(kayit){
+    var li = document.createElement('li');
+    li.className = 'gunluk-kayit';
+    var ust = document.createElement('div'); ust.className = 'ust';
+    var sol = document.createElement('div');
+    var tarih = document.createElement('span'); tarih.className = 'tarih'; tarih.textContent = kayit.tarih || '—';
+    sol.appendChild(tarih);
+    if (kayit.etiket) {
+      var et = document.createElement('span'); et.className = 'etiket'; et.textContent = ' · ' + kayit.etiket;
+      sol.appendChild(et);
+    }
+    var sil = document.createElement('button'); sil.className = 'sil'; sil.textContent = 'sil';
+    sil.addEventListener('click', function(){
+      var yeni = gunlukYukle().filter(function(k){ return k.id !== kayit.id; });
+      gunlukKaydet(yeni); gunlukCiz();
+    });
+    ust.appendChild(sol); ust.appendChild(sil);
+    var metin = document.createElement('div'); metin.className = 'metin'; metin.textContent = kayit.metin;
+    li.appendChild(ust); li.appendChild(metin);
+    ul.appendChild(li);
+  });
+}
+document.getElementById('ruya-tarih').valueAsDate = new Date();
+document.getElementById('ruya-kaydet').addEventListener('click', function(){
+  var metin = document.getElementById('ruya-metin').value.trim();
+  if (!metin) { document.getElementById('ruya-metin').focus(); return; }
+  var liste = gunlukYukle();
+  liste.push({
+    id: Date.now(),
+    tarih: document.getElementById('ruya-tarih').value,
+    etiket: document.getElementById('ruya-etiket').value,
+    metin: metin
+  });
+  gunlukKaydet(liste);
+  document.getElementById('ruya-metin').value = '';
+  document.getElementById('ruya-etiket').value = '';
+  gunlukCiz();
+});
+gunlukCiz();
+
+/* ---- Dışa aktarma: tüm notlar + günlük tek .txt ---- */
+document.getElementById('disa-aktar').addEventListener('click', function(){
+  var parcalar = ['BİREYLEŞME YOLU — KİŞİSEL ARŞİV', 'Dışa aktarma: ' + new Date().toLocaleString('tr-TR'), ''];
+  parcalar.push('=== AŞAMA NOTLARI ===');
+  document.querySelectorAll('.asama').forEach(function(a){
+    var baslikMetni = a.querySelector('.asama-baslik span').textContent.replace(/\s+/g,' ').trim();
+    var ta = a.querySelector('textarea[data-notkey]');
+    parcalar.push('', '[Aşama ' + a.dataset.asama + '] ' + baslikMetni);
+    parcalar.push(ta && ta.value.trim() ? ta.value.trim() : '(not yok)');
+  });
+  parcalar.push('', '=== KAVRAM NOTLARI ===');
+  document.querySelectorAll('.kavram').forEach(function(k){
+    var ad = k.querySelector('.kavram-baslik .ad').childNodes[0].textContent.trim();
+    var ta = k.querySelector('textarea[data-notkey]');
+    if (ta && ta.value.trim()) { parcalar.push('', '[' + ad + ']', ta.value.trim()); }
+  });
+  parcalar.push('', '=== RÜYA GÜNLÜĞÜ ===');
+  gunlukYukle().forEach(function(kayit){
+    parcalar.push('', kayit.tarih + (kayit.etiket ? ' · ' + kayit.etiket : ''), kayit.metin);
+  });
+  var blob = new Blob([parcalar.join('\n')], {type:'text/plain;charset=utf-8'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'bireylesme-yolu-arsiv.txt';
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+});
+
+/* ---- Aktif nav vurgusu ---- */
+var secler = document.querySelectorAll('section');
+var linkler = document.querySelectorAll('nav a.navlink');
+var gozlemci = new IntersectionObserver(function(girisler){
+  girisler.forEach(function(g){
+    if (g.isIntersecting) {
+      linkler.forEach(function(l){ l.classList.toggle('aktif', l.getAttribute('href') === '#' + g.target.id); });
+    }
+  });
+}, {rootMargin:'-30% 0px -60% 0px'});
+secler.forEach(function(s){ gozlemci.observe(s); });
+
+/* ---- Yukarı dön ---- */
+var yukari = document.getElementById('yukari');
+window.addEventListener('scroll', function(){
+  yukari.classList.toggle('goster', window.scrollY > 600);
+});
+yukari.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+</script>
+
+</body>
+</html>
